@@ -69,25 +69,21 @@ export default function SignIn() {
             margin="normal"
 
             fullWidth
-            id="email"
-            label="Que estàs pensando?"
-            name="email"
-            autoComplete="¿Que estàs pensando, nombre?"
+            id="mood"
+            label="¿Que estás pensando?"
+            name="mood"
+            autoComplete="¿Que estás pensando?"
             autoFocus
           />
-
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
-            Guardar frase
+            Analizar
+
           </Button>
         </form>
       </div>

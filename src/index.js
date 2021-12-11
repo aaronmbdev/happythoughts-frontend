@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import ParticlesBg from "particles-bg";
-import SignIn from "./SignIn";
+import SignIn from "./components/SignIn";
 import "./style.css";
 
 class App extends Component {
