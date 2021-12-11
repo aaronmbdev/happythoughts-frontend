@@ -7,8 +7,12 @@ import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {withStyles} from "@material-ui/core";
+import {analyzeText} from "../services/apiService";
+import PositiveResponse from "./PositiveResponse";
+import NegativeResponse from "./NegativeResponse";
+import NeutralResponse from "./NeutralResponse";
 
 function Copyright() {
   return (
@@ -23,7 +27,21 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+function RenderComponent(data)  {
+  if(data.data != null) {
+    if(data.data.result === "positive") {
+      return(<PositiveResponse data={data.data} />);
+    } else if (data.data.result === "negative") {
+      return (<NegativeResponse data={data.data} />);
+    } else {
+      return (<NeutralResponse />);
+    }
+  } else {
+    return(<p>.</p>);
+  }
+}
+
+const useStyles = theme => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
@@ -46,48 +64,78 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+});
 
-export default function SignIn() {
-  const classes = useStyles();
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      estado: "",
+      lastRequest: null
+    }
+    this.updateStatusValue = this.updateStatusValue.bind(this);
+    this.procesaEstado = this.procesaEstado.bind(this);
+  }
 
-  return (
-    <Container className="main" component="main" maxWidth="md">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Bienvenido a tu espacio personal, Marc
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
+  updateStatusValue(evt) {
+    this.setState({
+      estado: evt.target.value
+    });
+  }
 
-            fullWidth
-            id="mood"
-            label="¿Que estás pensando?"
-            name="mood"
-            autoComplete="¿Que estás pensando?"
-            autoFocus
-          />
-          <Button
-            type="button"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Analizar
+  procesaEstado() {
+    let status = this.state.estado;
+    let response = analyzeText(status);
+    response.then(data => {
+      this.setState({
+        lastRequest: data
+      })
+    })
+  }
 
-          </Button>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+  render() {
+    const {classes} = this.props;
+   return(<Container className="main" component="main" maxWidth="md">
+     <CssBaseline />
+     <div className={classes.paper}>
+       <Avatar className={classes.avatar}>
+         <LockOutlinedIcon />
+       </Avatar>
+       <Typography component="h1" variant="h5">
+         Bienvenido a tu espacio personal, Marc
+       </Typography>
+         <TextField
+             variant="outlined"
+             margin="normal"
+
+             fullWidth
+             id="mood"
+             label="¿Que estás pensando?"
+             name="mood"
+             autoComplete="¿Que estás pensando?"
+             onChange={this.updateStatusValue}
+             autoFocus
+         />
+         <Button
+             type="button"
+             fullWidth
+             variant="contained"
+             color="primary"
+             className={classes.submit}
+             onClick={this.procesaEstado}
+         >
+           Analizar
+
+         </Button>
+     </div>
+     <Box mt={8}>
+       <RenderComponent data={this.state.lastRequest}/>
+     </Box>
+     <Box mt={8}>
+       <Copyright />
+     </Box>
+   </Container>);
+  }
+
 }
+export default withStyles(useStyles) (SignIn);
