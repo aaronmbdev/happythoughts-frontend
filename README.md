@@ -4,30 +4,46 @@
 
 Este es el frontend del proyecto Happy Thoughts. 
 
-## Available Scripts
+Para el diseño de la web, hemos utilizado React con una plantilla que nos ha servido de base.
 
-In the project directory, you can run:
+Github de la plantilla utilizada: [https://github.com/lindelof/particles-bg-vue](https://github.com/lindelof/particles-bg-vue).
+
+## Scripts Disponibles
+
+En el directorio del proycto, podemos ejecutar:
+
+### `npm install`
+
+Instala todas las dependencias que necesita el proyecto.
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Lanza la aplicacion en modo desarollo
+abre [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+La página se recargará si editamos la misma.
+Se verán los errores en la consola.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Lanza la aplicación en modo interacitvo.
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Hace un build de la app para producción  `build` .\
 
-The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Demo
+
+![](/home/sel/Escritorio/BitxLaMarato/front/happythoughts-frontend-main/Images/demo1.jpg)
+
+## Github
+
+Repositorio del proyecto: 
+
+[https://github.com/aaronmbdev/happythoughts-frontend](https://github.com/aaronmbdev/happythoughts-frontend)
