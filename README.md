@@ -40,7 +40,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Demo
 
-![](/home/sel/Escritorio/BitxLaMarato/front/happythoughts-frontend-main/Images/demo1.jpg)
+![](images/demo1.jpg)
 
 ## Github
 
